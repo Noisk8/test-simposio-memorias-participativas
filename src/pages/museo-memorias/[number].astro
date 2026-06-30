@@ -1,0 +1,437 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import type { GetStaticPaths } from 'astro';
+
+const proyectos = [
+  { 
+    number: 30, 
+    title: "LIBRE", 
+    place: "Estado español", 
+    image: "/images/proyecto-30.jpg",
+    fullImage: "/images/proyecto-30.jpg",
+    author: "Fernando Sánchez Castillo",
+    collective: "Comisionado 50 años de España en Libertad",
+    description: "Libre invita a reflexionar sobre el papel del arte como herramienta de diálogo y construcción colectiva: una propuesta que convierte la memoria en acción y el pasado en una oportunidad para imaginar futuros más libres y compartidos.\n\nFernando Sánchez Castillo crea Libre, una instalación que reúne 25.000 réplicas de la estatua ecuestre del dictador Francisco Franco, realizadas con motivo de los 50 años de España en libertad y presentadas esta vez sin jinete. Más de 3.000 personas pudieron llevarse una de esas miniaturas a cambio de dejar un mensaje escrito (palabras, dibujos o reflexiones en torno a la libertad, la democracia o los derechos fundamentales) que se integra a un gran mural colectivo. Con esta acción, Libre se convierte en una metáfora viva de la democracia participativa: los símbolos del poder se transforman en espacios compartidos de memoria y pensamiento."
+  },
+  { 
+    number: 29, 
+    title: "Cartografías de Memorias de las luchas vecinales de Entrevías, El Pozo y Palomeras Bajas", 
+    place: "Madrid, Estado español", 
+    image: "/images/proyecto-29.jpg",
+    fullImage: "/images/proyecto-29.jpg",
+    author: "Sara Martín Terceño",
+    collective: "Celebración de los 50 años de España en Libertad y La Liminal",
+    description: "Durante el tardofranquismo y la transición, muchos barrios obreros de España se convirtieron en espacios esenciales de organización colectiva y aprendizaje ciudadano. Desde sus asociaciones vecinales impulsaron mejoras urbanas, fortalecieron redes de apoyo y se convirtieron en escuelas de democracia en un contexto sin libertades.\n\nCentrado en 3 barrios periféricos de Madrid, el proyecto recoge esta historia cruzando el territorio con la memoria oral, para dar forma a una cartografía que localiza espacios de reunión, lucha y conquista ciudadana y recoge relatos orales del vecindario. La iniciativa activa memorias locales, reconoce el papel de las mujeres y pone en valor estos patrimonios comunitarios."
+  },
+  { 
+    number: 28, 
+    title: "Retratos y objetos de los patrimonios de memoria y construcción de paz", 
+    place: "Colombia", 
+    image: "/images/proyecto-28.jpg",
+    fullImage: "/images/proyecto-28.jpg",
+    author: "",
+    collective: "Dirección de Patrimonio y Memoria del Ministerio de las Culturas",
+    description: "Estos velos son dispositivos expositivos que reúnen retratos y objetos de memoria como formas de narrar la experiencia del conflicto armado en Colombia desde lo íntimo y lo colectivo. Los velos articulan relatos, prácticas y materialidades que configuran un patrimonio vivo, en transformación constante. La memoria se activa como testimonio, resistencia y transmisión en la dignificación de las víctimas y la construcción de sentidos compartidos sobre el pasado."
+  },
+  { 
+    number: 27, 
+    title: "Políticas culturales de memoria en la Dirección de Patrimonio y Memoria", 
+    place: "Colombia", 
+    image: "/images/proyecto-27.jpg",
+    fullImage: "/images/proyecto-27.jpg",
+    author: "",
+    collective: "Dirección de Patrimonio y Memoria del Ministerio de las Culturas",
+    description: "Esta pieza audiovisual presenta las memorias del conflicto armado en Colombia como expresiones vivas construidas por comunidades y colectivos de víctimas. A través de lugares, objetos, prácticas y relatos, el video muestra cómo las políticas culturales de memoria contribuyen a la construcción de paz y justicia social."
+  },
+  { 
+    number: 26, 
+    title: "Herramientas digitales para combatir el memoricidio: memoria de la Nakba y narrativas palestinas", 
+    place: "Palestina, Jordania y Estados Unidos", 
+    image: "/images/proyecto-26.jpg",
+    fullImage: "/images/proyecto-26.jpg",
+    author: "Diego Checa Hidalgo y Belén Habboob Marto",
+    collective: "",
+    description: "Se trata de tres proyectos de historia digital que preservan la memoria histórica palestina frente a las políticas de borrado y silenciamiento vinculadas a la Nakba y sus consecuencias. A través de herramientas digitales, estos proyectos documentan y difunden las narrativas palestinas."
+  },
+  { 
+    number: 25, 
+    title: "Cuerpos que Resiten", 
+    place: "Granada, Estado español", 
+    image: "/images/proyecto-25.jpg",
+    fullImage: "/images/proyecto-25.jpg",
+    author: "Ana Victoria Mador Vargas",
+    collective: "",
+    description: "La obra Cuerpos que resisten forma parte del proyecto en proceso de creación Lo que tú no quieres ver. Este proyecto se compone de varias piezas que exploran la resistencia corporal como forma de memoria y protesta."
+  },
+  { 
+    number: 24, 
+    title: "El elocuente silencio del paisaje", 
+    place: "Burgos, Estado español", 
+    image: "/images/proyecto-24.jpg",
+    fullImage: "/images/proyecto-24.jpg",
+    author: "Antoni Coll Tort",
+    collective: "Coordinadora por la Recuperación de la Memoria Histórica de Burgos (CRMHB), Espacio Tangente y Foro Arte y Territorio. Comisariada por EUROM",
+    description: "Exposición fotográfica que explora los paisajes de memoria vinculados a la Guerra Civil y el franquismo en Burgos. El proyecto recoge los silencios y las huellas que quedan en el territorio como testimonio de la represión."
+  },
+  { 
+    number: 22, 
+    title: "Escuela Iberoamericana de Mediación en sitios y Museos de Memoria", 
+    place: "Chile, Argentina, México y España", 
+    image: "/images/proyecto-22.jpg",
+    fullImage: "/images/proyecto-22.jpg",
+    author: "",
+    collective: "Escuela Iberoamericana de Mediación en sitios y Museos de Memoria",
+    description: "La Escuela se propone como un espacio que busca aportar a la formación de mediadores, educadores y trabajadores con audiencias de museos y sitios de memoria. El proyecto abarca múltiples países iberoamericanos."
+  },
+  { 
+    number: 21, 
+    title: "Lorca con orgullo VR", 
+    place: "Granada, España", 
+    image: "/images/proyecto-21.jpg",
+    fullImage: "/images/proyecto-21.jpg",
+    author: "Mariela Luján, Andrew Simon Tucker",
+    collective: "",
+    description: "Documental VR 360º creado con la comunidad LGTBQIA+ de Granada que revisita momentos clave de la vida de Federico García Lorca. José y Enoc conectan sus luchas actuales con los..."
+  },
+  { 
+    number: 20, 
+    title: "Encuentro Intergeneracional de Memoria(s) en el parque de la Memoria de Sartaguda", 
+    place: "Navarra, España", 
+    image: "/images/proyecto-20.jpg",
+    fullImage: "/images/proyecto-20.jpg",
+    author: "",
+    collective: "Instituto Navarro de la Memoria",
+    description: "El Parque de la Memoria de Sartaguda se ha convertido en las últimas décadas en el lugar de memoria más emblemático de Navarra. En torno al muro donde se..."
+  },
+  { 
+    number: 19, 
+    title: "Las Otras Memorias", 
+    place: "Cartagena de Indias, Colombia", 
+    image: "/images/proyecto-19.jpg",
+    fullImage: "/images/proyecto-19.jpg",
+    author: "",
+    collective: "Semillero de Historia de la Fotografía en el Caribe Colombiano - Universidad Tecnológica de Bolívar",
+    description: "Proyecto de co-creación de narrativas barriales y comunitarias desarrollado en Cartagena de Indias, Colombia."
+  },
+  { 
+    number: 18, 
+    title: "La Madeja: Exposición Fotográfica Mujer Rural", 
+    place: "Vegas de Genil, Granada, España", 
+    image: "/images/proyecto-18.jpg",
+    fullImage: "/images/proyecto-18.jpg",
+    author: "",
+    collective: "Archivo Municipal de Vegas de Genil y Centro de la Mujer de Vegas de Genil",
+    description: "La Madeja presenta a través de fotografías de mujeres rurales de antaño, su conexión con las mujeres de hoy mediante un hilo conductor."
+  },
+  { 
+    number: 16, 
+    title: "El territorio en las cosas", 
+    place: "Colombia", 
+    image: "/images/proyecto-16.jpg",
+    fullImage: "/images/proyecto-16.jpg",
+    author: "",
+    collective: "Semilleros Territorios y Estéticas Sociales - Jorge Tadeo Lozano",
+    description: "Es una obra de investigación-creación que explora cómo objetos..."
+  },
+  { 
+    number: 15, 
+    title: "Herstóricas: memorias desde lo colectivo", 
+    place: "Madrid, Granada (España)", 
+    image: "/images/proyecto-15.jpg",
+    fullImage: "/images/proyecto-15.jpg",
+    author: "",
+    collective: "Asociación Herstóricas. Historia, mujeres y género",
+    description: "Herstóricas es un proyecto cultural y educativo que trabaja la historia de las mujeres desde perspectivas feministas. La memoria..."
+  },
+  { 
+    number: 14, 
+    title: "¡Reproduzca Expansivamente!", 
+    place: "Colombia", 
+    image: "/images/proyecto-14.jpg",
+    fullImage: "/images/proyecto-14.jpg",
+    author: "",
+    collective: "Entrelazando",
+    description: "La escritura no requiere permisos, pero hay quien la usa para distorsionar la realidad, proclamándose a sí mismos..."
+  },
+  { 
+    number: 13, 
+    title: "Palimpsestos Paralelos: Barrios en Transformación a Través de la Mirada de Niñes", 
+    place: "Barrio de Albayzín Granada, España y Barrio de Anjos, Lisboa, Portugal", 
+    image: "/images/proyecto-13.jpg",
+    fullImage: "/images/proyecto-13.jpg",
+    author: "",
+    collective: "Periferias Dibujadas",
+    description: "¿Cómo podemos trabajar la memoria y la imaginación de..."
+  },
+  { 
+    number: 12, 
+    title: "Muro de la Presencia", 
+    place: "Esquina Redonda, Bronx Distrito Creativo, centro de Bogotá. Colombia", 
+    image: "/images/proyecto-12.jpg",
+    fullImage: "/images/proyecto-12.jpg",
+    author: "",
+    collective: "Esquina Redonda, Bronx Distrito Creativo",
+    description: "La obra es fruto del trabajo de La Esquina Redonda, laboratorio de creación y memoria ubicado en la..."
+  },
+  { 
+    number: 11, 
+    title: "Amoratorio de Creación: Cenizas, Flores y Faroles para No Olvidar", 
+    place: "Bogotá Colombia", 
+    image: "/images/proyecto-11.jpg",
+    fullImage: "/images/proyecto-11.jpg",
+    author: "",
+    collective: "amoratorio de Creación, mujeres buscadoras",
+    description: "Práctica artística comunitaria desarrollada por artistas y mujeres buscadoras de víctimas de desaparición forzada y crímenes de lesa humanidad. A través..."
+  },
+  { 
+    number: 10, 
+    title: "Radio Almaina, 15 Años de Radio Libre en Granada", 
+    place: "Granada, España", 
+    image: "/images/proyecto-10.jpg",
+    fullImage: "/images/proyecto-10.jpg",
+    author: "",
+    collective: "Radio Almaina",
+    description: "Radio Almaina es la radio libre que, desde hace 15 años, le toma el pulso a Granada. Somos una radio asamblearia que transmite en FM y en la web, y formamos parte de una red de radios libres..."
+  },
+  { 
+    number: 9, 
+    title: "Proyecto Etno Vega (s)", 
+    place: "Vegas del Genil, Granada, España", 
+    image: "/images/proyecto-9.jpg",
+    fullImage: "/images/proyecto-9.jpg",
+    author: "",
+    collective: "Etno Vega (s)",
+    description: "Etno-Vegas se conforma como colectivo y proyecto en el seno de las \"II Jornadas de Etnografía audiovisual: las mujeres de la Vega de Granada\", impulsadas..."
+  },
+  { 
+    number: 8, 
+    title: "Historias Inconclusas", 
+    place: "Colombia", 
+    image: "/images/proyecto-8.jpg",
+    fullImage: "/images/proyecto-8.jpg",
+    author: "",
+    collective: "Programa Somos Defensores y Portal periodístico Verdad Abierta",
+    description: "Proyecto colombiano que aboga por la memoria y la lucha contra la impunidad en asesinatos..."
+  },
+  { 
+    number: 7, 
+    title: "Sabedores RA", 
+    place: "Región Caribe, Colombia", 
+    image: "/images/proyecto-7.jpg",
+    fullImage: "/images/proyecto-7.jpg",
+    author: "German Villalobos, Roberto Aguas, Anyelin Rodríguez, Laura Marin, Sorany Marin Trejos",
+    collective: "La Piragua Transmedia- Universidad del Magdalena",
+    description: "Experiencia de realidad aumentada..."
+  },
+  { 
+    number: 6, 
+    title: "Proyecto de Memoria Juvenil «Ruta al Exilio»", 
+    place: "Andalucía, Euskal Herria, Catalunya, Madrid, Occitania. España", 
+    image: "/images/proyecto-6.jpg",
+    fullImage: "/images/proyecto-6.jpg",
+    author: "",
+    collective: "Asociación Ruta al Exilio",
+    description: "Presentación basada en fotografías y objetos. Ruta al Exilio..."
+  },
+  { 
+    number: 5, 
+    title: "Proyecto 6402+", 
+    place: "Colombia", 
+    image: "/images/proyecto-5.jpg",
+    fullImage: "/images/proyecto-5.jpg",
+    author: "",
+    collective: "Wikimedia Colombia - MAFAPO",
+    description: "6402+ es un memorial digital en construcción y una publicación que dignifica a las víctimas de ejecuciones extrajudiciales en Colombia, transformando sentencias..."
+  },
+  { 
+    number: 4, 
+    title: "PuebloAgua, Universo Anfibio", 
+    place: "Nueva Venecia, Magdalena, Colombia", 
+    image: "/images/proyecto-4.jpg",
+    fullImage: "/images/proyecto-4.jpg",
+    author: "Sorany Marin Trejos, Roberto Aguas, Anyelin Rodríguez, Laura Marin, German Villalobos",
+    collective: "La Piragua Transmedia- Universidad del Magdalena",
+    description: "Obra transmedia: obra audiovisual y plataforma interactiva..."
+  },
+  { 
+    number: 3, 
+    title: "Sal y Surco: Retrato y territorio", 
+    place: "Habana, Cuba y Granada, España", 
+    image: "/images/proyecto-3.jpg",
+    fullImage: "/images/proyecto-3.jpg",
+    author: "Carmen Rivero",
+    collective: "",
+    description: "Esta obra articula un ensayo fotográfico entre un barrio de La Habana y la Vega de Granada, estableciendo un diálogo visual entre dos contextos socio..."
+  },
+  { 
+    number: 1, 
+    title: "Exposición de Arte Sacro-Social «San Miguel Harto»", 
+    place: "Barrio de cuevas de San Miguel Alto, Granada, España", 
+    image: "/images/proyecto-1.jpg",
+    fullImage: "/images/proyecto-1.jpg",
+    author: "",
+    collective: "Asociación de Vecinxs del Cerro de San Miguel y Centro Social Cuevas de Lxs Niñxs de la Noche Alto",
+    description: "Lo sagrado y lo social se hibridan para crear una experiencia artística comunitaria en el barrio de cuevas de San Miguel Alto."
+  },
+];
+
+export const getStaticPaths: GetStaticPaths = () => {
+  const allProyectos = [
+    { number: 30, title: "LIBRE" },
+    { number: 29, title: "Cartografías de Memorias de las luchas vecinales de Entrevías, El Pozo y Palomeras Bajas" },
+    { number: 28, title: "Retratos y objetos de los patrimonios de memoria y construcción de paz" },
+    { number: 27, title: "Políticas culturales de memoria en la Dirección de Patrimonio y Memoria" },
+    { number: 26, title: "Herramientas digitales para combatir el memoricidio: memoria de la Nakba y narrativas palestinas" },
+    { number: 25, title: "Cuerpos que Resiten" },
+    { number: 24, title: "El elocuente silencio del paisaje" },
+    { number: 22, title: "Escuela Iberoamericana de Mediación en sitios y Museos de Memoria" },
+    { number: 21, title: "Lorca con orgullo VR" },
+    { number: 20, title: "Encuentro Intergeneracional de Memoria(s) en el parque de la Memoria de Sartaguda" },
+    { number: 19, title: "Las Otras Memorias" },
+    { number: 18, title: "La Madeja: Exposición Fotográfica Mujer Rural" },
+    { number: 16, title: "El territorio en las cosas" },
+    { number: 15, title: "Herstóricas: memorias desde lo colectivo" },
+    { number: 14, title: "¡Reproduzca Expansivamente!" },
+    { number: 13, title: "Palimpsestos Paralelos: Barrios en Transformación a Través de la Mirada de Niñes" },
+    { number: 12, title: "Muro de la Presencia" },
+    { number: 11, title: "Amoratorio de Creación: Cenizas, Flores y Faroles para No Olvidar" },
+    { number: 10, title: "Radio Almaina, 15 Años de Radio Libre en Granada" },
+    { number: 9, title: "Proyecto Etno Vega (s)" },
+    { number: 8, title: "Historias Inconclusas" },
+    { number: 7, title: "Sabedores RA" },
+    { number: 6, title: "Proyecto de Memoria Juvenil «Ruta al Exilio»" },
+    { number: 5, title: "Proyecto 6402+" },
+    { number: 4, title: "PuebloAgua, Universo Anfibio" },
+    { number: 3, title: "Sal y Surco: Retrato y territorio" },
+    { number: 1, title: "Exposición de Arte Sacro-Social «San Miguel Harto»" },
+  ];
+  return allProyectos.map(p => ({
+    params: { number: p.number.toString() },
+    props: {},
+  }));
+};
+
+const { number } = Astro.params;
+const proyecto = proyectos.find(p => p.number === Number(number));
+
+if (!proyecto) {
+  return Astro.redirect('/museo-memorias');
+}
+
+// Find prev/next projects
+const currentIndex = proyectos.findIndex(p => p.number === Number(number));
+const prevProject = currentIndex < proyectos.length - 1 ? proyectos[currentIndex + 1] : null;
+const nextProject = currentIndex > 0 ? proyectos[currentIndex - 1] : null;
+---
+
+<Layout title={`${proyecto.title} - Museo de Memorias Vivas`}>
+  <!-- Hero -->
+  <section class="relative h-[30vh] min-h-[250px] flex items-center justify-center overflow-hidden">
+    <div class="absolute inset-0">
+      <img 
+        src="/images/hero-bg.jpg" 
+        alt="Museo de Memorias Vivas" 
+        class="w-full h-full object-cover"
+      />
+      <div class="absolute inset-0 bg-black/60"></div>
+    </div>
+    <div class="relative z-10 text-center px-4">
+      <nav class="text-white/70 text-sm mb-4">
+        <a href="/" class="hover:text-white transition-colors">Inicio</a>
+        <span class="mx-2">/</span>
+        <a href="/museo-memorias" class="hover:text-white transition-colors">Museo de Memorias Vivas</a>
+        <span class="mx-2">/</span>
+        <span class="text-white">{proyecto.number}. {proyecto.title}</span>
+      </nav>
+      <h1 class="text-3xl md:text-4xl font-bold text-white font-[family-name:var(--font-heading)] drop-shadow-lg max-w-4xl mx-auto">
+        {proyecto.number}. {proyecto.title}
+      </h1>
+    </div>
+  </section>
+
+  <!-- Contenido del proyecto -->
+  <section class="py-12 bg-white">
+    <div class="max-w-4xl mx-auto px-4">
+      <!-- Imagen del proyecto -->
+      <div class="mb-8">
+        <img 
+          src={proyecto.fullImage} 
+          alt={proyecto.title}
+          class="w-full rounded-xl shadow-lg"
+        />
+      </div>
+
+      <!-- Metadatos -->
+      <div class="flex flex-wrap gap-4 mb-8 text-sm">
+        <div class="flex items-center gap-2 text-ugr-green">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+          </svg>
+          <span>{proyecto.place}</span>
+        </div>
+        {proyecto.author && (
+          <div class="flex items-center gap-2 text-ugr-text-light">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+            </svg>
+            <span>{proyecto.author}</span>
+          </div>
+        )}
+        {proyecto.collective && (
+          <div class="flex items-center gap-2 text-ugr-text-light">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
+            </svg>
+            <span>{proyecto.collective}</span>
+          </div>
+        )}
+      </div>
+
+      <!-- Descripción -->
+      <div class="prose prose-lg max-w-none">
+        {proyecto.description.split('\n\n').map(paragraph => (
+          <p class="text-ugr-text leading-relaxed mb-4">{paragraph}</p>
+        ))}
+      </div>
+
+      <!-- Navegación entre proyectos -->
+      <div class="mt-12 pt-8 border-t border-gray-200">
+        <div class="flex justify-between items-center">
+          {prevProject ? (
+            <a 
+              href={`/museo-memorias/${prevProject.number}`}
+              class="flex items-center gap-2 text-ugr-green hover:text-ugr-green-light transition-colors"
+            >
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+              </svg>
+              <span class="hidden sm:inline">Anterior: {prevProject.number}. {prevProject.title.substring(0, 30)}...</span>
+              <span class="sm:hidden">Anterior</span>
+            </a>
+          ) : <div />}
+          
+          <a 
+            href="/museo-memorias"
+            class="text-ugr-green hover:text-ugr-green-light transition-colors"
+          >
+            Volver al Museo
+          </a>
+
+          {nextProject ? (
+            <a 
+              href={`/museo-memorias/${nextProject.number}`}
+              class="flex items-center gap-2 text-ugr-green hover:text-ugr-green-light transition-colors"
+            >
+              <span class="hidden sm:inline">Siguiente: {nextProject.number}. {nextProject.title.substring(0, 30)}...</span>
+              <span class="sm:hidden">Siguiente</span>
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+              </svg>
+            </a>
+          ) : <div />}
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
