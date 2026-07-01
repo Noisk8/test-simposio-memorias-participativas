@@ -28,22 +28,36 @@ const { title, description = 'I Simposio sobre Memorias Participativas - Univers
     </main>
     <Footer />
     <script is:inline>
-      if (window.netlifyIdentity) {
-        window.netlifyIdentity.on('init', (user) => {
+      // Integración con Netlify Identity para el acceso al gestor de contenido (/admin/).
+      // El widget se carga desde <head>; esperamos a que window.netlifyIdentity exista
+      // antes de registrar los manejadores (por si el script aún no terminó de cargar).
+      (function initNetlifyIdentity() {
+        if (!window.netlifyIdentity) {
+          document.addEventListener('DOMContentLoaded', initNetlifyIdentity, { once: true });
+          return;
+        }
+
+        const identity = window.netlifyIdentity;
+
+        identity.on('init', (user) => {
           const hash = window.location.hash;
-          // Si hay token de invitación o recuperación, abrir el modal
+          // Los correos de invitación y de recuperación de contraseña enlazan a la
+          // raíz del sitio con el token en el hash. Abrimos el modal para completarlos.
           if (hash && (hash.includes('invite_token=') || hash.includes('recovery_token='))) {
-            window.netlifyIdentity.open();
-            return;
-          }
-          // Si no hay sesión activa, al hacer login redirigir al admin
-          if (!user) {
-            window.netlifyIdentity.on('login', () => {
-              document.location.href = '/admin/';
-            });
+            identity.open();
           }
         });
-      }
+
+        // Al iniciar sesión correctamente, llevar al editor al panel del CMS.
+        identity.on('login', () => {
+          document.location.href = '/admin/';
+        });
+
+        // Al cerrar sesión, volver a la portada.
+        identity.on('logout', () => {
+          document.location.href = '/';
+        });
+      })();
     </script>
   </body>
 </html>
