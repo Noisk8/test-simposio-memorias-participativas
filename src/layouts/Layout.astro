@@ -29,14 +29,23 @@ const { title, description = 'I Simposio sobre Memorias Participativas - Univers
     <Footer />
     <script is:inline>
       if (window.netlifyIdentity) {
+        const hash = window.location.hash;
+        const isIdentityCallback =
+          hash.includes('invite_token=') ||
+          hash.includes('confirmation_token=') ||
+          hash.includes('recovery_token=') ||
+          hash.includes('access_token=');
+
+        if (isIdentityCallback && !window.location.pathname.startsWith('/admin')) {
+          window.location.replace(`/admin/${hash}`);
+        }
+
         window.netlifyIdentity.on('init', (user) => {
-          const hash = window.location.hash;
-          // Si hay token de invitación o recuperación, abrir el modal
-          if (hash && (hash.includes('invite_token=') || hash.includes('recovery_token='))) {
+          if (isIdentityCallback) {
             window.netlifyIdentity.open();
             return;
           }
-          // Si no hay sesión activa, al hacer login redirigir al admin
+
           if (!user) {
             window.netlifyIdentity.on('login', () => {
               document.location.href = '/admin/';
