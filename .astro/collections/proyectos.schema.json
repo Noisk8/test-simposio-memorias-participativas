@@ -12,15 +12,18 @@
       "type": "string"
     },
     "author": {
+      "default": "",
       "type": "string"
     },
-    "description": {
+    "collective": {
+      "default": "",
       "type": "string"
     },
     "image": {
       "type": "string"
     },
-    "date": {
+    "description": {
+      "default": "",
       "type": "string"
     },
     "$schema": {
@@ -31,8 +34,6 @@
     "number",
     "title",
     "place",
-    "author",
-    "image",
-    "date"
+    "image"
   ]
 }

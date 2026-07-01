@@ -12,14 +12,14 @@ collections:
     create: true
     slug: "{{number}}-{{slug}}"
     fields:
-      - { label: "Número", name: "number", widget: "number" }
+      - { label: "Número", name: "number", widget: "number", value_type: "int" }
       - { label: "Título", name: "title", widget: "string" }
       - { label: "Lugar", name: "place", widget: "string" }
-      - { label: "Colectivo/Autor", name: "author", widget: "string" }
-      - { label: "Descripción", name: "description", widget: "text", required: false }
+      - { label: "Autor/a", name: "author", widget: "string", required: false, default: "" }
+      - { label: "Colectivo", name: "collective", widget: "string", required: false, default: "" }
       - { label: "Imagen", name: "image", widget: "image" }
-      - { label: "Fecha", name: "date", widget: "datetime", format: "YYYY-MM-DD" }
-      - { label: "Cuerpo", name: "body", widget: "markdown", required: false }
+      - { label: "Descripción corta (para tarjetas)", name: "description", widget: "text", required: false, default: "" }
+      - { label: "Texto completo (Markdown)", name: "body", widget: "markdown", required: false }
 
   - name: "pages"
     label: "Páginas"
