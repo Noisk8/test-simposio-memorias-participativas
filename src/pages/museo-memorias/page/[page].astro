@@ -1,7 +1,7 @@
 ---
 import Layout from '../../../layouts/Layout.astro';
-import { getCollection } from 'astro:content';
-import type { GetStaticPaths } from 'astro';
+import { getCollection, type CollectionEntry } from 'astro:content';
+import type { GetStaticPaths, Page } from 'astro';
 
 export const getStaticPaths: GetStaticPaths = async ({ paginate }) => {
   const todos = await getCollection('proyectos');
@@ -9,7 +9,11 @@ export const getStaticPaths: GetStaticPaths = async ({ paginate }) => {
   return paginate(ordenados, { pageSize: 10 });
 };
 
-const { page } = Astro.props;
+interface Props {
+  page: Page<CollectionEntry<'proyectos'>>;
+}
+
+const { page } = Astro.props as Props;
 const proyectos = page.data;
 const totalPages = page.lastPage;
 const currentPage = page.currentPage;
