@@ -19,7 +19,7 @@ const { title, description = 'I Simposio sobre Memorias Participativas - Univers
     <meta name="description" content={description} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>{title}</title>
-    <script src="https://identity.netlify.com/v1/netlify.js"></script>
+    <script is:inline src="https://identity.netlify.com/v1/netlify.js"></script>
   </head>
   <body class="min-h-screen flex flex-col">
     <Header />
@@ -29,18 +29,15 @@ const { title, description = 'I Simposio sobre Memorias Participativas - Univers
     <Footer />
     <script is:inline>
       if (window.netlifyIdentity) {
+        // Al iniciar sesión (incluye aceptar invitación / recuperar) ir al admin
+        window.netlifyIdentity.on('login', () => {
+          document.location.href = '/admin/';
+        });
         window.netlifyIdentity.on('init', (user) => {
           const hash = window.location.hash;
           // Si hay token de invitación o recuperación, abrir el modal
           if (hash && (hash.includes('invite_token=') || hash.includes('recovery_token='))) {
             window.netlifyIdentity.open();
-            return;
-          }
-          // Si no hay sesión activa, al hacer login redirigir al admin
-          if (!user) {
-            window.netlifyIdentity.on('login', () => {
-              document.location.href = '/admin/';
-            });
           }
         });
       }
