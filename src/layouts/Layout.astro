@@ -27,7 +27,7 @@ const { title, description = 'I Simposio sobre Memorias Participativas - Univers
       <slot />
     </main>
     <Footer />
-    <script>
+    <script is:inline>
       if (window.netlifyIdentity) {
         window.netlifyIdentity.on('init', (user) => {
           const hash = window.location.hash;
