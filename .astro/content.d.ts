@@ -131,7 +131,23 @@ declare module 'astro:content' {
 		: any;
 
 	type DataEntryMap = {
-		
+		"pages": Record<string, {
+  id: string;
+  body?: string;
+  collection: "pages";
+  data: InferEntrySchema<"pages">;
+  rendered?: RenderedContent;
+  filePath?: string;
+}>;
+"proyectos": Record<string, {
+  id: string;
+  body?: string;
+  collection: "proyectos";
+  data: InferEntrySchema<"proyectos">;
+  rendered?: RenderedContent;
+  filePath?: string;
+}>;
+
 	};
 
 	type ExtractLoaderTypes<T> = T extends import('astro/loaders').LiveLoader<
