@@ -21,12 +21,4 @@ collections:
       - { label: "Descripción corta (para tarjetas)", name: "description", widget: "text", required: false, default: "" }
       - { label: "Texto completo (Markdown)", name: "body", widget: "markdown", required: false }
 
-  - name: "pages"
-    label: "Páginas"
-    folder: "src/content/pages"
-    create: true
-    slug: "{{slug}}"
-    fields:
-      - { label: "Título", name: "title", widget: "string" }
-      - { label: "Descripción", name: "description", widget: "string" }
-      - { label: "Cuerpo", name: "body", widget: "markdown" }
+
