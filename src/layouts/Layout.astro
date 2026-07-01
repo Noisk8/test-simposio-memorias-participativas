@@ -29,6 +29,12 @@ const { title, description = 'I Simposio sobre Memorias Participativas - Univers
     <script src="https://identity.netlify.com/v1/netlify.js"></script>
     <script>
       if (window.netlifyIdentity) {
+        // Si hay invite_token o recovery_token en el hash, abrir el modal
+        const hash = window.location.hash;
+        if (hash && (hash.includes('invite_token=') || hash.includes('recovery_token='))) {
+          window.netlifyIdentity.open();
+        }
+
         window.netlifyIdentity.on('init', (user) => {
           if (!user) {
             window.netlifyIdentity.on('login', () => {
